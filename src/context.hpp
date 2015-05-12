@@ -9,6 +9,7 @@ class Context
 {
 public:
 	Context ();
+	virtual ~Context () = default;
 };
 
 #endif
