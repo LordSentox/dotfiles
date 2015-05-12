@@ -8,6 +8,10 @@ class Config : public std::vector <std::string>
 {
 public:
 	Config (const std::string &filename);
-}
+
+private:
+	unsigned int parse ();
+
+};
 
 #endif

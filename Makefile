@@ -3,7 +3,7 @@
 ###############################################
 
 cc=g++ -std=c++11 -Wall -Wextra
-src=dotfiles.cc
+src=config.cc context.cc dotfiles.cc statement.cc
 
 sDir=src
 oDir=obj
@@ -14,7 +14,13 @@ obj=$(patsubst %, $(oDir)/%, $(rawObj))
 rawObj-d=$(patsubst %.cc, %-d.o, $(src))
 obj-d=$(patsubst %, $(oDir)/%, $(rawObj-d))
 
-all: dotfiles dotfiles-d
+update: dotfiles
+	bin/dotfiles --update
+
+install: clean dotfiles
+	bin/dotfiles --install
+
+compile: dotfiles dotfiles-d
 
 dotfiles: mkdir $(obj)
 	$(cc) $(obj) -o bin/$@
