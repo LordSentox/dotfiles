@@ -5,5 +5,5 @@
 *.obj
 
 # Executables
-bin/fantastic
-bin/fantastic-d
+bin/dotfiles
+bin/dotfiles-d
