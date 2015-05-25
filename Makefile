@@ -2,7 +2,7 @@
 # This file is part of the dotfiles repository.
 ###############################################
 
-cc=g++ -std=c++11 -Wall -Wextra
+cc=clang -std=c++11 -Wall -Wextra
 src=config.cc context.cc dotfiles.cc statement.cc
 
 sDir=src

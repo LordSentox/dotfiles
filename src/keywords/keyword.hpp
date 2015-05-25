@@ -22,23 +22,24 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#include "parser.hpp"
-#include <iostream>
+#ifndef KEYWORD_HPP
+#define KEYWORD_HPP
 
-int main (int argc, char *argv[])
+namespace Keyword
 {
-	// Execute all actions that are asked for.
-	for (int i = 1; i < argc; ++i)
-	{
-		std::string command (argv [i]);
-		if (command == "--update")
-		{
-			std::cout << "Update has been started.." << std::endl;
-		}
-		else {
-			std::cout << "Unrecognized flag: " << command << std::endl;
-		}
-	}
 
-	return 0;
+class Keyword
+{
+public:
+	Keyword (Keyword *previous);
+	virtual ~Keyword () = default;
+
+	virtual void checkNext (Keyword *next) const noexcept = 0;
+	void setNext (Keyword *next);
+
+	virtual int execute () = 0;
+};
+
 }
+
+#endif

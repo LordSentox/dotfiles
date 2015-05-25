@@ -1,3 +1,4 @@
+
 /*******************************************************************************
 * The MIT License (MIT)
 *
@@ -22,23 +23,21 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#include "parser.hpp"
-#include <iostream>
+#ifndef KEYWORD_ADD_HPP
+#define KEYWORD_ADD_HPP
 
-int main (int argc, char *argv[])
+#include "keyword.hpp"
+
+namespace Keyword
 {
-	// Execute all actions that are asked for.
-	for (int i = 1; i < argc; ++i)
-	{
-		std::string command (argv [i]);
-		if (command == "--update")
-		{
-			std::cout << "Update has been started.." << std::endl;
-		}
-		else {
-			std::cout << "Unrecognized flag: " << command << std::endl;
-		}
-	}
 
-	return 0;
+class Add : public Keyword
+{
+public:
+	Add ()
+
+};
+
 }
+
+#endif
