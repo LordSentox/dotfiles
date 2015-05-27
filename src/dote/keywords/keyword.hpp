@@ -1,4 +1,3 @@
-
 /*******************************************************************************
 * The MIT License (MIT)
 *
@@ -23,19 +22,23 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#ifndef KEYWORD_ADD_HPP
-#define KEYWORD_ADD_HPP
+#ifndef DOTE_KEYKeyword_HPP
+#define DOTE_KEYKeyword_HPP
 
-#include "keyword.hpp"
+#include "../element.hpp"
 
-namespace Keyword
+namespace dote
 {
 
-class Add : public Keyword
+// Abstract baseclass for all KeyKeywords.
+class Keyword : public Element
 {
 public:
-	Add ()
+	Keyword ();
+	Keyword (Element *previous);
+	virtual ~Keyword () noexcept = default;
 
+	virtual int execute () = 0;
 };
 
 }

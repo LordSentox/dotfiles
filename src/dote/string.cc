@@ -22,23 +22,16 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#include "dote.hpp"
-#include <iostream>
+#include "string.hpp"
 
-int main (int argc, char *argv[])
+using namespace dote;
+
+String::String () noexcept
+: Element {}, std::string {""}
 {
-	// Execute all actions that are asked for.
-	for (int i = 1; i < argc; ++i)
-	{
-		std::string command (argv [i]);
-		if (command == "--update")
-		{
-			std::cout << "Update has been started.." << std::endl;
-		}
-		else {
-			std::cout << "Unrecognized flag: " << command << std::endl;
-		}
-	}
+}
 
-	return 0;
+String::String (const std::string &content) noexcept
+: Element {}, std::string {content}
+{
 }

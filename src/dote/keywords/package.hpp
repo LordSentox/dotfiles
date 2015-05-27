@@ -22,23 +22,23 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#include "dote.hpp"
-#include <iostream>
+#ifndef KEYWORD_PACKAGE_HPP
+#define KEYWORD_PACKAGE_HPP
 
-int main (int argc, char *argv[])
+#include "keyword.hpp"
+
+namespace dote
 {
-	// Execute all actions that are asked for.
-	for (int i = 1; i < argc; ++i)
-	{
-		std::string command (argv [i]);
-		if (command == "--update")
-		{
-			std::cout << "Update has been started.." << std::endl;
-		}
-		else {
-			std::cout << "Unrecognized flag: " << command << std::endl;
-		}
-	}
 
-	return 0;
+class Package : public Keyword
+{
+public:
+	virtual void setPrevious (Element *previous) final override;
+	virtual void setNext (Element *next) final override;
+
+	virtual int execute () final override;
+};
+
 }
+
+#endif

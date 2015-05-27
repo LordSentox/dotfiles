@@ -22,24 +22,43 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#ifndef KEYWORD_HPP
-#define KEYWORD_HPP
+#include "element.hpp"
+#include <iostream>
 
-namespace Keyword
+using namespace dote;
+
+Element::Element () noexcept
+: m_previous {nullptr}, m_next {nullptr}
 {
-
-class Keyword
-{
-public:
-	Keyword (Keyword *previous);
-	virtual ~Keyword () = default;
-
-	virtual void checkNext (Keyword *next) const noexcept = 0;
-	void setNext (Keyword *next);
-
-	virtual int execute () = 0;
-};
-
 }
 
-#endif
+Element::~Element () noexcept
+{
+	// Every element takes care of the next one, so that only the first one
+	// has to be destroyed explicitely in a chain.
+	if (m_next != nullptr)
+		delete m_next;
+}
+
+Element *Element::previous () const noexcept
+{
+	return m_previous;
+}
+
+void Element::setPrevious (Element *previous)
+{
+	m_previous = previous;
+}
+
+Element *Element::next () const noexcept
+{
+	return m_next;
+}
+
+void Element::setNext (Element *next)
+{
+	if (m_next != nullptr)
+		std::cout << "Changing next element even though the previous one was not null.\n";
+
+	m_next = next;
+}

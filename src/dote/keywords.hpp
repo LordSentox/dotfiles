@@ -26,5 +26,6 @@
 #define KEYWORDS_HPP
 
 #include "keywords/add.hpp"
+#include "keywords/package.hpp"
 
 #endif

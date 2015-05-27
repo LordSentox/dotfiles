@@ -58,7 +58,7 @@ private:
 	// The current statement on which work is done. nullptr in case no statement
 	// has been loaded. The pointer actually just points to the first keyword.
 	// On deletion that keyword will take care of the other statements.
-	Keyword *m_currentStatement;
+	dote::Keyword *m_currentStatement;
 
 	// The input stream from which the parser get's it's input.
 	std::istream *m_input;

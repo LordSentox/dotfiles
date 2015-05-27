@@ -21,3 +21,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 *******************************************************************************/
+
+#ifndef DOTE_HPP
+#define DOTE_HPP
+
+#include "dote/parser.hpp"
+
+#endif

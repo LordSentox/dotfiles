@@ -22,23 +22,17 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#include "dote.hpp"
-#include <iostream>
+#include "keyword.hpp"
 
-int main (int argc, char *argv[])
+using namespace dote;
+
+Keyword::Keyword ()
 {
-	// Execute all actions that are asked for.
-	for (int i = 1; i < argc; ++i)
-	{
-		std::string command (argv [i]);
-		if (command == "--update")
-		{
-			std::cout << "Update has been started.." << std::endl;
-		}
-		else {
-			std::cout << "Unrecognized flag: " << command << std::endl;
-		}
-	}
+	m_previous = m_next = nullptr;
+}
 
-	return 0;
+Keyword::Keyword (Element *previous)
+{
+	setPrevious (previous);
+	m_next = nullptr;
 }

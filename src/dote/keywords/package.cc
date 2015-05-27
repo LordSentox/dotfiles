@@ -22,22 +22,53 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#include "dote.hpp"
+#include "package.hpp"
+#include "add.hpp"
+#include "../string.hpp"
+#include <assert.h>
 #include <iostream>
 
-int main (int argc, char *argv[])
+using namespace dote;
+
+void Package::setPrevious (Element *previous)
 {
-	// Execute all actions that are asked for.
-	for (int i = 1; i < argc; ++i)
+	if (previous == nullptr || dynamic_cast<Add *> (previous) == nullptr)
 	{
-		std::string command (argv [i]);
-		if (command == "--update")
-		{
-			std::cout << "Update has been started.." << std::endl;
-		}
-		else {
-			std::cout << "Unrecognized flag: " << command << std::endl;
-		}
+		std::cout << "The package-keyword must always be preceded by one like 'add' or 'no'.\n";
+		throw 1;
+	}
+
+	m_previous = previous;
+}
+
+void Package::setNext (Element *next)
+{
+	String *packageName = dynamic_cast<String *> (next);
+	if (packageName == nullptr)
+	{
+		std::cout << "Expected the name of the package after the package-keyword.\n";
+		throw 2;
+	}
+}
+
+int Package::execute ()
+{
+	// Not properly handled in parser.cc in case this fails.
+	assert (m_next != nullptr);
+	assert (m_previous != nullptr);
+
+	// This should never fail if the parser was written correctly.
+	String *packageName = dynamic_cast<String *> (m_next);
+	assert (packageName != nullptr);
+
+	if (dynamic_cast<Add *> (m_previous) != nullptr)
+	{
+		std::cout << "Adding package " << (*packageName) << " (not yet implemented).\n";
+	}
+	//else if (dynamic_cast<No *> (m_previous) != nullptr)
+	else
+	{
+		std::cout << "Removing package " << (*packageName) << " (not yet implemented).\n";
 	}
 
 	return 0;

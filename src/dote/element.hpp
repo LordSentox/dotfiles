@@ -21,3 +21,32 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 *******************************************************************************/
+
+#ifndef DOTE_ELEMENT_HPP
+#define DOTE_ELEMENT_HPP
+
+namespace dote
+{
+
+// Class representing an element that stands in relation to other elements
+// sorrounding it, for instance after it has been parsed.
+class Element
+{
+public:
+	Element () noexcept;
+	virtual ~Element () noexcept;
+
+	Element *previous () const noexcept;
+	virtual void setPrevious (Element *previous);
+
+	Element *next () const noexcept;
+	virtual void setNext (Element *next);
+
+protected:
+	Element *m_previous;
+	Element *m_next;
+};
+
+}
+
+#endif

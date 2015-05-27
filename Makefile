@@ -3,16 +3,14 @@
 ###############################################
 
 cc=clang -std=c++11 -Wall -Wextra
-src=config.cc context.cc dotfiles.cc statement.cc
 
-sDir=src
-oDir=obj
+# Listing of source-files sorted by directory-hierarchie.
+keywords := $(patsubst %, keywords/%, add.cc package.cc word.cc)
+src := $(patsubst %, src/%, dotfiles.cc parser.cc $(keywords))
 
-rawObj=$(patsubst %.cc, %.o, $(src))
-obj=$(patsubst %, $(oDir)/%, $(rawObj))
-
-rawObj-d=$(patsubst %.cc, %-d.o, $(src))
-obj-d=$(patsubst %, $(oDir)/%, $(rawObj-d))
+srcObj := $(patsubst %.cc, %.o, $(src))
+obj    := $(patsubst src/%, obj/%, $(srcObj))
+obj-d  := $(patsubst %.o, %-d.o, $(obj))
 
 update: dotfiles
 	bin/dotfiles --update
@@ -28,15 +26,15 @@ dotfiles: mkdir $(obj)
 dotfiles-d: mkdir $(obj-d)
 	$(cc) $(obj-d) -ggdb3 -o bin/$@
 
-$(oDir)/%.o: $(sDir)/%.cc
+obj/%.o: src/%.cc
 	$(cc) $(pkgConfig) -c $< -o $@
-$(oDir)/%-d.o: $(sDir)/%.cc
+obj/%-d.o: src/%.cc
 	$(cc) $(pkgConfig) -c $< -ggdb3 -o $@
 
 .PHONY : clean
 clean:
-	rm -rf bin/dotfiles bin/dotfiles-d $(oDir)
+	rm -rf bin/dotfiles bin/dotfiles-d obj
 
 .PHONY : mkdir
 mkdir:
-	mkdir -pv bin $(oDir)
+	mkdir -pv bin obj obj/keywords

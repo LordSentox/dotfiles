@@ -22,23 +22,41 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#include "dote.hpp"
+#include "add.hpp"
+#include "package.hpp"
+#include <assert.h>
 #include <iostream>
 
-int main (int argc, char *argv[])
+using namespace dote;
+
+void Add::setPrevious (Element *previous)
 {
-	// Execute all actions that are asked for.
-	for (int i = 1; i < argc; ++i)
+	if (previous != nullptr)
 	{
-		std::string command (argv [i]);
-		if (command == "--update")
-		{
-			std::cout << "Update has been started.." << std::endl;
-		}
-		else {
-			std::cout << "Unrecognized flag: " << command << std::endl;
-		}
+		std::cout << "The add-keyword may not be preceded by anything more than blank space.\n";
+		throw 2;
 	}
 
-	return 0;
+	m_previous = previous;
 }
+
+void Add::setNext (Element *next)
+{
+	// For the time being only the package-keyword may follow the add-keyword.
+	if (dynamic_cast<Package *> (next) == nullptr)
+	{
+		std::cout << "Unexpected specifier after 'add'.\n";
+		throw 1;
+	}
+
+	m_next = next;
+}
+
+int Add::execute ()
+{
+	Keyword *next = dynamic_cast<Keyword *> (m_next);
+	assert (next != nullptr);
+
+	// The next keyword is actually the one that does the work.
+	return next->execute();
+};
