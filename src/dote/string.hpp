@@ -36,6 +36,7 @@ class String : public Element, public std::string
 public:
 	String () noexcept;
 	String (const std::string &content) noexcept;
+	virtual ~String () noexcept {}
 };
 
 }

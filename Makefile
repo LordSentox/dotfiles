@@ -2,11 +2,12 @@
 # This file is part of the dotfiles repository.
 ###############################################
 
-cc=clang -std=c++11 -Wall -Wextra
+cc=clang++ -std=c++11 -Wall -Wextra
 
 # Listing of source-files sorted by directory-hierarchie.
-keywords := $(patsubst %, keywords/%, add.cc package.cc word.cc)
-src := $(patsubst %, src/%, dotfiles.cc parser.cc $(keywords))
+keywords := $(patsubst %, keywords/%, add.cc keyword.cc package.cc)
+dote := $(patsubst %, dote/%, element.cc file.cc parser.cc string.cc $(keywords))
+src := $(patsubst %, src/%, dotfiles.cc $(dote))
 
 srcObj := $(patsubst %.cc, %.o, $(src))
 obj    := $(patsubst src/%, obj/%, $(srcObj))
@@ -37,4 +38,4 @@ clean:
 
 .PHONY : mkdir
 mkdir:
-	mkdir -pv bin obj obj/keywords
+	mkdir -pv bin obj obj/dote obj/dote/keywords

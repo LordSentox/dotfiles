@@ -27,6 +27,8 @@
 #include <assert.h>
 #include <stdexcept>
 
+using namespace dote;
+
 Parser::Parser () noexcept
 : m_currentStatement {nullptr}, m_input {nullptr}
 {

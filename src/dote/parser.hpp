@@ -30,6 +30,9 @@
 #include <istream>
 #include <vector>
 
+namespace dote
+{
+
 class Parser
 {
 public:
@@ -71,5 +74,7 @@ private:
 		bool readingString;
 	} m_pickup;
 };
+
+}
 
 #endif

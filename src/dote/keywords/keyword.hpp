@@ -22,8 +22,8 @@
 * SOFTWARE.
 *******************************************************************************/
 
-#ifndef DOTE_KEYKeyword_HPP
-#define DOTE_KEYKeyword_HPP
+#ifndef DOTE_KEYWORD_HPP
+#define DOTE_KEYWORD_HPP
 
 #include "../element.hpp"
 
